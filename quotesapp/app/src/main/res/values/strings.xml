@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Quottie</string>
+
+    <!--hints-->
+    <string name="hint_quotable_phrase">Quotable Phrase</string>
+    <string name="hint_who_said_it">Who said it</string>
+
+    <!--button text-->
+    <string name="btn_text_add_quotes">Add Quote</string>
+    <string name="btn_text_update_quotes">Update Quote</string>
+
+    <!--status-->
+    <string name="quotes_status">No Quotes Available</string>
+
+    <!--adapter-->
+    <string name="quotes_adapter_per">- %s</string>
+    <string name="detail_person">- %s -</string>
+
+    <!--sample texts-->
+    <string name="sample_detail_content">Sed ut persiciatis unde monis iste natus error sit voluptatem accusantium doloremque laudatium, totam rem operiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione volumptatem sequi nesciunt.</string>
+
+
+</resources>
