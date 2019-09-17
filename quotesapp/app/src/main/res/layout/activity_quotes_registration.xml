@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.quotes_app.viewmodel.QuotesRegistrationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/baseBackground">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22ssp"
+            android:layout_marginTop="@dimen/_22ssp"
+            android:layout_marginEnd="@dimen/_22ssp"
+            android:elevation="@dimen/_4ssp"
+            app:cardCornerRadius="@dimen/_6ssp"
+            app:layout_constraintBottom_toTopOf="@id/btnAddQuotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/form_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInput_phrase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10ssp"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText_phrase"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/hint_quotable_phrase"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/_10ssp"
+                        android:paddingTop="@dimen/_10ssp"
+                        android:paddingEnd="@dimen/_10ssp"
+                        android:text="@={viewModel.quotePhrase}"
+                        android:textSize="@dimen/_15ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:id="@+id/view_field_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1ssp"
+                    android:background="@color/baseBackground" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInput_whoSaidIt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10ssp"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText_whoSaidIt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/hint_who_said_it"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/_10ssp"
+                        android:paddingTop="@dimen/_10ssp"
+                        android:paddingEnd="@dimen/_10ssp"
+                        android:text="@={viewModel.quotePerson}"
+                        android:textSize="@dimen/_15ssp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/btnAddQuotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22ssp"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_marginEnd="@dimen/_22ssp"
+            android:background="@drawable/rounded_corners_background"
+            android:backgroundTint="@color/colorBlue"
+            android:onClick="@{ () -> viewModel.onAddQuoteClicked()}"
+            android:text="@string/btn_text_add_quotes"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/cardView"
+            app:layout_constraintStart_toStartOf="@id/cardView"
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
