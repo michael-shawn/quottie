@@ -2,7 +2,6 @@ package com.example.quotes_app.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.quotes_app.data.database.model.Quotes
@@ -22,6 +21,6 @@ interface QuotesDao {
     @Query("delete from quotes_table where id = :id")
     fun deleteQuote(id: Int)
 
-    /*@Delete
-    fun deleteQuote(quote: Quotes)*/
+    @Query("update quotes_table set phrase=:quotablePhrase, person=:quotedBy where id=:id")
+    fun updateQuote(id: Int, quotablePhrase: String, quotedBy: String)
 }

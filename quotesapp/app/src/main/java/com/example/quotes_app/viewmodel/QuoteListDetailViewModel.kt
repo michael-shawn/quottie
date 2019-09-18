@@ -9,6 +9,9 @@ class QuoteListDetailViewModel(
     private val quotesRepository: QuoteRepository
 ) : ViewModel() {
 
+    var clicked = MutableLiveData<Boolean>()
+    var clickedBack = MutableLiveData<Boolean>()
+
     var id = MutableLiveData<Int>()
 
     init {
@@ -16,6 +19,14 @@ class QuoteListDetailViewModel(
     }
 
     val quoteDetailEntries by lazyDeferred {
-        quotesRepository.readDetail(id.value!!)
+        quotesRepository.readQuoteDetail(id.value!!)
+    }
+
+    fun onBackClicked() {
+        clickedBack.value = true
+    }
+
+    fun updateClicked() {
+        clicked.value = true
     }
 }

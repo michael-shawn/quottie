@@ -5,11 +5,13 @@ import com.example.quotes_app.data.database.model.Quotes
 
 interface QuoteRepository {
 
-    fun insert(quotes: Quotes)
+    fun insertQuote(quotes: Quotes)
 
-    suspend fun read(): LiveData<List<Quotes>>
+    suspend fun readQuotes(): LiveData<List<Quotes>>
 
-    suspend fun  readDetail(id: Int): LiveData<Quotes>
+    suspend fun  readQuoteDetail(id: Int): LiveData<Quotes>
 
-    fun delete(id: Int)
+    fun deleteQuote(id: Int)
+
+    fun updateQuote(id: Int, quotablePhrase: String, quotedBy: String)
 }

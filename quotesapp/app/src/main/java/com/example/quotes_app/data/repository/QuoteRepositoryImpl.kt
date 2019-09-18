@@ -12,27 +12,33 @@ class QuoteRepositoryImpl(
     private val quotesDatabase: QuotesDatabase
 ) : QuoteRepository {
 
-    override fun insert(quotes: Quotes) {
+    override fun insertQuote(quotes: Quotes) {
         GlobalScope.launch(Dispatchers.IO) {
             quotesDatabase.quotesDao().insertQuote(quotes)
         }
     }
 
-    override suspend fun read(): LiveData<List<Quotes>> {
+    override suspend fun readQuotes(): LiveData<List<Quotes>> {
         return withContext(Dispatchers.IO) {
             return@withContext quotesDatabase.quotesDao().readQuotes()
         }
     }
 
-    override suspend fun readDetail(id: Int): LiveData<Quotes> {
+    override suspend fun readQuoteDetail(id: Int): LiveData<Quotes> {
         return withContext(Dispatchers.IO) {
             return@withContext quotesDatabase.quotesDao().readQuoteDetail(id)
         }
     }
 
-    override fun delete(id: Int) {
+    override fun deleteQuote(id: Int) {
         GlobalScope.launch(Dispatchers.IO) {
             quotesDatabase.quotesDao().deleteQuote(id)
+        }
+    }
+
+    override fun updateQuote(id: Int, quotablePhrase: String, quotedBy: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            quotesDatabase.quotesDao().updateQuote(id, quotablePhrase, quotedBy)
         }
     }
 }
