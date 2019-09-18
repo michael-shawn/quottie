@@ -22,26 +22,10 @@ class QuotesApplication : Application(), KodeinAware {
         import(androidXModule(this@QuotesApplication))
 
         bind() from singleton { QuotesDatabase(instance()) }
-        bind() from provider {
-            QuotesRegistrationViewModelFactory(
-                instance()
-            )
-        }
-        bind() from provider {
-            QuotesViewModelFactory(
-                instance()
-            )
-        }
-        bind() from provider {
-            QuoteListDetailViewModelFactory(
-                instance()
-            )
-        }
-        bind() from provider {
-            QuoteUpdateViewModelFactory(
-                instance()
-            )
-        }
+        bind() from provider { QuotesRegistrationViewModelFactory(instance()) }
+        bind() from provider { QuotesViewModelFactory(instance()) }
+        bind() from provider { QuoteListDetailViewModelFactory(instance()) }
+        bind() from provider { QuoteUpdateViewModelFactory(instance()) }
         bind<QuoteRepository>() with singleton { QuoteRepositoryImpl(instance()) }
 
     }

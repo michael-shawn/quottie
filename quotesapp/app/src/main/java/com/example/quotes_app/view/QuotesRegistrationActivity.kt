@@ -13,7 +13,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
-
 class QuotesRegistrationActivity : ScopedActivity(), KodeinAware {
 
     override val kodein by closestKodein()
