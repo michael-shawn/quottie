@@ -17,7 +17,7 @@ import com.example.quotes_app.data.database.model.Quotes
 import com.example.quotes_app.databinding.ActivityQuotesBinding
 import com.example.quotes_app.view.base.ScopedActivity
 import com.example.quotes_app.viewmodel.QuotesViewModel
-import com.example.quotes_app.viewmodel.QuotesViewModelFactory
+import com.example.quotes_app.viewmodelfactory.QuotesViewModelFactory
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.quotes_list_item.view.btnDelete
@@ -38,6 +38,7 @@ class QuotesActivity : ScopedActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quotes)
+        supportActionBar?.hide()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_quotes)
         binding.lifecycleOwner = this
@@ -53,10 +54,6 @@ class QuotesActivity : ScopedActivity(), KodeinAware {
 
     private fun gotoRegistration() {
         startActivity(Intent(this, QuotesRegistrationActivity::class.java))
-        overridePendingTransition(
-            R.transition.slide_in_right,
-            R.transition.slide_out_left
-        )
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {
@@ -100,7 +97,6 @@ class QuotesActivity : ScopedActivity(), KodeinAware {
 
         groupAdapter.setOnItemClickListener { item, view ->
             (item as QuotesAdapter)?.let { entry ->
-
                 if (view.btnDelete.isPressed) {
                     view.btnDelete.setOnClickListener {
                         viewModel.id.value = entry.quotes.quotes_id

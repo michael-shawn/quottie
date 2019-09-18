@@ -1,5 +1,6 @@
 package com.example.quotes_app.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -9,7 +10,7 @@ import com.example.quotes_app.constant.CONSTANT
 import com.example.quotes_app.databinding.ActivityQuoteListDetailBinding
 import com.example.quotes_app.view.base.ScopedActivity
 import com.example.quotes_app.viewmodel.QuoteListDetailViewModel
-import com.example.quotes_app.viewmodel.QuoteListDetailViewModelFactory
+import com.example.quotes_app.viewmodelfactory.QuoteListDetailViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -33,24 +34,39 @@ class QuoteListDetailActivity : ScopedActivity(), KodeinAware {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(QuoteListDetailViewModel::class.java)
+        binding.viewModel = viewModel
 
         viewModel.id.value = intent.extras?.getInt(CONSTANT.QUOTE_ID)
+
+        viewModel.clicked.observe(this, Observer { gotoUpdateActivity() })
+        viewModel.clickedBack.observe(this, Observer {
+            onBackPressed()
+            overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right)
+        })
 
         bindUI()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(
-            R.transition.slide_in_left,
-            R.transition.slide_out_right
-        )
+        overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right)
+    }
+
+    private fun gotoUpdateActivity() = launch(Dispatchers.Main) {
+        val quoteDetailEntries = viewModel.quoteDetailEntries.await()
+        quoteDetailEntries.observe(this@QuoteListDetailActivity, Observer {
+            val intent = Intent(this@QuoteListDetailActivity, QuoteUpdateActivity::class.java)
+            intent.putExtra(CONSTANT.QUOTE_ID, it.quotes_id)
+            intent.putExtra(CONSTANT.QUOTE_PHRASE, it.quotes_phrase)
+            intent.putExtra(CONSTANT.QUOTE_BY, it.quotes_person)
+            startActivity(intent)
+            finish()
+        })
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {
         val quoteDetailEntries = viewModel.quoteDetailEntries.await()
         quoteDetailEntries.observe(this@QuoteListDetailActivity, Observer {
-
             binding.txtQuotablePhrase.text = it.quotes_phrase
             binding.txtQuotedBy.text = String.format(
                 getString(R.string.detail_person),

@@ -9,20 +9,22 @@ class QuotesRegistrationViewModel(
     private val quotesRepository: QuoteRepository
 ) : ViewModel() {
 
-    var clicked = MutableLiveData<Boolean>()
+    var clickedBack = MutableLiveData<Boolean>()
 
     var quotePhrase = MutableLiveData<String>()
     var quotePerson = MutableLiveData<String>()
 
     init {
-        clicked.value = false
         quotePhrase.value = ""
         quotePerson.value = ""
     }
 
+    fun onBackClicked() {
+        clickedBack.value = true
+    }
+
     fun onAddQuoteClicked() {
-        clicked.value = true
-        quotesRepository.insert(Quotes(quotePhrase.value, quotePerson.value))
+        quotesRepository.insertQuote(Quotes(quotePhrase.value, quotePerson.value))
 
         quotePhrase.value = ""
         quotePerson.value = ""

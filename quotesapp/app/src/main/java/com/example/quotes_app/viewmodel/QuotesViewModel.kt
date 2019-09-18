@@ -17,7 +17,7 @@ class QuotesViewModel(
     }
 
     val quotesEntries by lazyDeferred {
-        quotesRepository.read()
+        quotesRepository.readQuotes()
     }
 
     fun clickedRegistration() {
@@ -25,6 +25,6 @@ class QuotesViewModel(
     }
 
     fun onDeleteQuote(id: Int) {
-        quotesRepository.delete(id)
+        quotesRepository.deleteQuote(id)
     }
 }

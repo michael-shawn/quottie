@@ -4,9 +4,10 @@ import android.app.Application
 import com.example.quotes_app.data.database.QuotesDatabase
 import com.example.quotes_app.data.repository.QuoteRepository
 import com.example.quotes_app.data.repository.QuoteRepositoryImpl
-import com.example.quotes_app.viewmodel.QuoteListDetailViewModelFactory
-import com.example.quotes_app.viewmodel.QuotesRegistrationViewModelFactory
-import com.example.quotes_app.viewmodel.QuotesViewModelFactory
+import com.example.quotes_app.viewmodelfactory.QuoteListDetailViewModelFactory
+import com.example.quotes_app.viewmodelfactory.QuoteUpdateViewModelFactory
+import com.example.quotes_app.viewmodelfactory.QuotesRegistrationViewModelFactory
+import com.example.quotes_app.viewmodelfactory.QuotesViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -24,6 +25,7 @@ class QuotesApplication : Application(), KodeinAware {
         bind() from provider { QuotesRegistrationViewModelFactory(instance()) }
         bind() from provider { QuotesViewModelFactory(instance()) }
         bind() from provider { QuoteListDetailViewModelFactory(instance()) }
+        bind() from provider { QuoteUpdateViewModelFactory(instance()) }
         bind<QuoteRepository>() with singleton { QuoteRepositoryImpl(instance()) }
 
     }

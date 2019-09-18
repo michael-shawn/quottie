@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.quotes_app.viewmodel.QuoteListDetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingRegistered">
+
+            <ImageButton
+                android:id="@+id/imagebutton_toolbar_icon"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{ () -> viewModel.onBackClicked()}"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_delete" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconDetail"
@@ -34,7 +62,7 @@
             app:layout_constraintBottom_toTopOf="@id/btnUpdateQuote"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -83,6 +111,7 @@
             android:background="@drawable/rounded_corners_background"
             android:backgroundTint="@color/colorBlue"
             android:elevation="@dimen/dp_8"
+            android:onClick="@{ () -> viewModel.updateClicked() }"
             android:paddingStart="@dimen/dp_10"
             android:paddingEnd="@dimen/dp_10"
             android:text="@string/btn_text_update_quotes"
